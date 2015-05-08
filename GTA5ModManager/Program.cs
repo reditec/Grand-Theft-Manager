@@ -25,6 +25,7 @@ namespace GTA5ModManager
             Tools.CheckForUpdates();
 
             Application.Run(new ManagerForm());
+
         }
     }
 }

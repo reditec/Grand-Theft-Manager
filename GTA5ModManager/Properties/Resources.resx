@@ -141,4 +141,7 @@
   <data name="ErrorHeader" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="modFilters" xml:space="preserve">
+    <value>Zip Files|*.zip|RAR Files|*.rar|7z Files|*.7z|All Files|*.*</value>
+  </data>
 </root>

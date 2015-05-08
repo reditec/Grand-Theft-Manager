@@ -15,18 +15,45 @@ namespace GTA5ModManager
         {
             InitializeComponent();
 
+            consoleBox.AllowDrop = true;
+            consoleBox.DragEnter += Console_DragEnter;
+            consoleBox.DragDrop += Console_DragDrop;
+
             enableButton.TabStop = false;
             enableButton.FlatStyle = FlatStyle.Flat;
             enableButton.FlatAppearance.BorderSize = 0;
+
             uninstallButton.TabStop = false;
             uninstallButton.FlatStyle = FlatStyle.Flat;
             uninstallButton.FlatAppearance.BorderSize = 0;
+
             refreshButton.TabStop = false;
             refreshButton.FlatStyle = FlatStyle.Flat;
             refreshButton.FlatAppearance.BorderSize = 0;
 
+            installButton.TabStop = false;
+            installButton.FlatStyle = FlatStyle.Flat;
+            installButton.FlatAppearance.BorderSize = 0;
+
             _functions.Setup(consoleBox);
             PopulateModList();
+        }
+
+        private void Console_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void Console_DragDrop(object sender, DragEventArgs e)
+        {
+            var files = (string[]) e.Data.GetData(DataFormats.FileDrop);
+            if (files == null) throw new ArgumentNullException("files");
+            foreach (var file in files)
+            {
+                _functions.ExtractZipFile(file, _functions.GetGtaPath());
+                RefreshModList();
+                Log(Path.GetFileName(file) + " has been installed");
+            }
         }
 
         private void RefreshModList()
@@ -191,6 +218,22 @@ namespace GTA5ModManager
 
         private void ManagerForm_Load(object sender, EventArgs e)
         {
+        }
+
+        private void installButton_Click(object sender, EventArgs e)
+        {
+            openModFileDialog.Filter = Resources.modFilters;
+            if (openModFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var path = openModFileDialog.FileName;
+                _functions.ExtractZipFile(path, _functions.GetGtaPath());
+                RefreshModList();
+                Log(Path.GetFileName(path) + " has been installed");
+            }
+            else
+            {
+                Log("Install cancelled by user.");
+            }
         }
     }
 }

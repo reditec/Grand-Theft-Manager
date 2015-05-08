@@ -35,6 +35,8 @@ namespace GTA5ModManager
             this.uninstallButton = new System.Windows.Forms.Button();
             this.enableButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
+            this.installButton = new System.Windows.Forms.Button();
+            this.openModFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // modListBox
@@ -95,15 +97,32 @@ namespace GTA5ModManager
             // refreshButton
             // 
             this.refreshButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.refreshButton.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.refreshButton.Font = new System.Drawing.Font("Open Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.refreshButton.Location = new System.Drawing.Point(276, 208);
+            this.refreshButton.Location = new System.Drawing.Point(393, 208);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(111, 23);
             this.refreshButton.TabIndex = 4;
             this.refreshButton.Text = "Refresh Mods";
             this.refreshButton.UseVisualStyleBackColor = false;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // installButton
+            // 
+            this.installButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.installButton.Font = new System.Drawing.Font("Open Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.installButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.installButton.Location = new System.Drawing.Point(276, 208);
+            this.installButton.Name = "installButton";
+            this.installButton.Size = new System.Drawing.Size(111, 23);
+            this.installButton.TabIndex = 5;
+            this.installButton.Text = "Install Mod";
+            this.installButton.UseVisualStyleBackColor = false;
+            this.installButton.Click += new System.EventHandler(this.installButton_Click);
+            // 
+            // openModFileDialog
+            // 
+            this.openModFileDialog.FileName = "openModFileDialog";
             // 
             // ManagerForm
             // 
@@ -112,6 +131,7 @@ namespace GTA5ModManager
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(746, 379);
+            this.Controls.Add(this.installButton);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.enableButton);
             this.Controls.Add(this.uninstallButton);
@@ -134,6 +154,8 @@ namespace GTA5ModManager
         private System.Windows.Forms.Button uninstallButton;
         private Button enableButton;
         private Button refreshButton;
+        private Button installButton;
+        private OpenFileDialog openModFileDialog;
 
     }
 }

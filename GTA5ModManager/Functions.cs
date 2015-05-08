@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 
 namespace GTA5ModManager
@@ -39,6 +41,48 @@ namespace GTA5ModManager
                 Log(consoleBox, "[MM] Mod folder does not exist; creating. \n");
                 Directory.CreateDirectory(path + "mods/");
                 Directory.CreateDirectory(path + "mods/disabled");
+            }
+        }
+
+        public void ExtractZipFile(string archiveFilenameIn, string outFolder)
+        {
+            ZipFile zf = null;
+            try
+            {
+                var fs = File.OpenRead(archiveFilenameIn);
+                zf = new ZipFile(fs);
+
+                foreach (ZipEntry zipEntry in zf)
+                {
+                    if (!zipEntry.IsFile) continue; // Ignore directories
+
+
+                    var entryFileName = Path.GetFileName(zipEntry.Name);
+                    // to remove the folder from the entry:
+                    // entryFileName = Path.GetFileName(entryFileName);
+
+                    var buffer = new byte[4096]; // 4K is optimum
+                    var zipStream = zf.GetInputStream(zipEntry);
+
+                    // Manipulate the output filename here as desired.
+                    var fullZipToPath = Path.Combine(outFolder, entryFileName);
+                    var directoryName = Path.GetDirectoryName(fullZipToPath);
+                    if (directoryName.Length > 0)
+                        Directory.CreateDirectory(directoryName);
+
+                    using (var streamWriter = File.Create(fullZipToPath))
+                    {
+                        StreamUtils.Copy(zipStream, streamWriter, buffer);
+                    }
+                }
+            }
+            finally
+            {
+                if (zf != null)
+                {
+                    zf.IsStreamOwner = true;
+                    zf.Close();
+                }
             }
         }
 
