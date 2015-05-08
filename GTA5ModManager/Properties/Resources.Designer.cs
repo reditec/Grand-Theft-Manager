@@ -134,7 +134,7 @@ namespace GTA5ModManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zip Files|*.zip|RAR Files|*.rar|7z Files|*.7z|All Files|*.*.
+        ///   Looks up a localized string similar to Zip Files|*.zip|All Files|*.*.
         /// </summary>
         internal static string modFilters {
             get {

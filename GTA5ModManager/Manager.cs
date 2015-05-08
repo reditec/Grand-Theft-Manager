@@ -50,9 +50,13 @@ namespace GTA5ModManager
             if (files == null) throw new ArgumentNullException("files");
             foreach (var file in files)
             {
-                _functions.ExtractZipFile(file, _functions.GetGtaPath());
-                RefreshModList();
-                Log(Path.GetFileName(file) + " has been installed");
+                var status = _functions.ExtractZipFile(consoleBox, file, _functions.GetGtaPath());
+                if (status == true)
+                {
+                    RefreshModList();
+                    Log(Path.GetFileName(file) + " has been installed");
+                }
+               
             }
         }
 
@@ -226,9 +230,12 @@ namespace GTA5ModManager
             if (openModFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var path = openModFileDialog.FileName;
-                _functions.ExtractZipFile(path, _functions.GetGtaPath());
-                RefreshModList();
-                Log(Path.GetFileName(path) + " has been installed");
+                var status = _functions.ExtractZipFile(consoleBox, path, _functions.GetGtaPath());
+                if (status == true)
+                {
+                    RefreshModList();
+                    Log(Path.GetFileName(path) + " has been installed");
+                }
             }
             else
             {

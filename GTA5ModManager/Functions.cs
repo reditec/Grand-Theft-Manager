@@ -44,13 +44,22 @@ namespace GTA5ModManager
             }
         }
 
-        public void ExtractZipFile(string archiveFilenameIn, string outFolder)
+        public bool ExtractZipFile(RichTextBox console, string archiveFilenameIn, string outFolder)
         {
             ZipFile zf = null;
             try
             {
                 var fs = File.OpenRead(archiveFilenameIn);
-                zf = new ZipFile(fs);
+                try
+                {
+                    zf = new ZipFile(fs);
+                }
+                catch (Exception)
+                {
+
+                    Log(console, "Only ZIP archives are supported for automatic install");
+                    return false;
+                }
 
                 foreach (ZipEntry zipEntry in zf)
                 {
@@ -83,7 +92,9 @@ namespace GTA5ModManager
                     zf.IsStreamOwner = true;
                     zf.Close();
                 }
+               
             }
+            return true;
         }
 
         public void EnableMod(string modPath)
