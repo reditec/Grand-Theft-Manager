@@ -1,25 +1,18 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using GTA5ModManager.Properties;
 
 namespace GTA5ModManager
 {
     public partial class ManagerForm : Form
     {
-        Functions functions = new Functions();
-        private string currentPath;
+        private readonly Functions _functions = new Functions();
+        private string _currentPath;
+
         public ManagerForm()
         {
-           
-           
             InitializeComponent();
 
             enableButton.TabStop = false;
@@ -32,56 +25,52 @@ namespace GTA5ModManager
             refreshButton.FlatStyle = FlatStyle.Flat;
             refreshButton.FlatAppearance.BorderSize = 0;
 
-            functions.Setup(consoleBox);
+            _functions.Setup(consoleBox);
             PopulateModList();
         }
-
-
 
         private void RefreshModList()
         {
             modListBox.DataSource = null;
             modListBox.Items.Clear();
-            var gtaPath = functions.GetGTAPath();
-            var disabledModsPath = functions.GetDisabledModsPath();
+            var gtaPath = _functions.GetGtaPath();
+            var disabledModsPath = _functions.GetDisabledModsPath();
 
-            List<ModList> mods = new List<ModList>();
+            var enabledModsInfo = new DirectoryInfo(gtaPath);
 
-            DirectoryInfo enabledModsInfo = new DirectoryInfo(gtaPath);
-
-            FileInfo[] enabledMods = enabledModsInfo.GetFiles("*.asi");
+            var enabledMods = enabledModsInfo.GetFiles("*.asi");
 
 
-            foreach (FileInfo enabledMod in enabledMods)
+            var mods =
+                enabledMods.Select(
+                    enabledMod =>
+                        new ModList {Path = gtaPath + enabledMod.Name, Name = enabledMod.Name.Replace(".asi", "")})
+                    .ToList();
+
+            var disabledModsInfo = new DirectoryInfo(disabledModsPath);
+
+            var disabledMods = disabledModsInfo.GetFiles("*.asi");
+            mods.AddRange(disabledMods.Select(disabledMod => new ModList
             {
-                mods.Add(new ModList() { Path = gtaPath + enabledMod.Name, Name = enabledMod.Name.Replace(".asi", "") });
-
-            }
-
-            DirectoryInfo disabledModsInfo = new DirectoryInfo(disabledModsPath);
-
-            FileInfo[] disabledMods = disabledModsInfo.GetFiles("*.asi");
-            foreach (FileInfo disabledMod in disabledMods)
-            {
-                mods.Add(new ModList() { Path = disabledModsPath + disabledMod.Name, Name = disabledMod.Name.Replace(".asi", "") });
-
-            }
+                Path = disabledModsPath + disabledMod.Name,
+                Name = disabledMod.Name.Replace(".asi", "")
+            }));
             modListBox.DisplayMember = "Name";
             modListBox.DataSource = mods;
 
             var modsLoaded = enabledMods.Length + disabledMods.Length;
             var totalDisabled = disabledMods.Length;
             var totalEnabled = enabledMods.Length;
-            Log("[MM] " + modsLoaded + " total mods loaded, " + totalEnabled + " mods are enabled and " + totalDisabled + " mods are disabled \n");
+            Log("[MM] " + modsLoaded + " total mods loaded, " + totalEnabled + " mods are enabled and " + totalDisabled +
+                " mods are disabled \n");
         }
+
         private void PopulateModList()
         {
-            var gtaPath = functions.GetGTAPath();
-            var disabledModsPath = functions.GetDisabledModsPath();
+            var gtaPath = _functions.GetGtaPath();
+            var disabledModsPath = _functions.GetDisabledModsPath();
 
-            List<ModList> mods = new List<ModList>();
-
-            if (String.IsNullOrEmpty(gtaPath))
+            if (string.IsNullOrEmpty(gtaPath))
             {
                 Log("[MM] GTA Path Not Found: Check if GTA5 Installed properly");
                 return;
@@ -89,32 +78,33 @@ namespace GTA5ModManager
             Log("[MM] Scanning for mods: " + gtaPath + "\n");
 
 
-            DirectoryInfo enabledModsInfo = new DirectoryInfo(gtaPath);
-            
-            FileInfo[] enabledMods = enabledModsInfo.GetFiles("*.asi");
+            var enabledModsInfo = new DirectoryInfo(gtaPath);
+
+            var enabledMods = enabledModsInfo.GetFiles("*.asi");
 
 
-            foreach (FileInfo enabledMod in enabledMods)
+            var mods =
+                enabledMods.Select(
+                    enabledMod =>
+                        new ModList {Path = gtaPath + enabledMod.Name, Name = enabledMod.Name.Replace(".asi", "")})
+                    .ToList();
+
+            var disabledModsInfo = new DirectoryInfo(disabledModsPath);
+
+            var disabledMods = disabledModsInfo.GetFiles("*.asi");
+            mods.AddRange(disabledMods.Select(disabledMod => new ModList
             {
-                mods.Add(new ModList() { Path = gtaPath + enabledMod.Name, Name = enabledMod.Name.Replace(".asi", "") });
-  
-            }
-
-            DirectoryInfo disabledModsInfo = new DirectoryInfo(disabledModsPath);
-
-            FileInfo[] disabledMods = disabledModsInfo.GetFiles("*.asi");
-            foreach (FileInfo disabledMod in disabledMods)
-            {
-                mods.Add(new ModList() { Path = disabledModsPath + disabledMod.Name, Name = disabledMod.Name.Replace(".asi", "") });
-               
-            }
+                Path = disabledModsPath + disabledMod.Name,
+                Name = disabledMod.Name.Replace(".asi", "")
+            }));
             modListBox.DisplayMember = "Name";
             modListBox.DataSource = mods;
 
             var modsLoaded = enabledMods.Length + disabledMods.Length;
             Log("[MM] " + modsLoaded + " mods loaded \n");
-            Log(File.Exists(gtaPath + "ScriptHookV.dll") ? "Script Hook installed." : "Script Hook not installed. Download at http://www.dev-c.com/gtav/scripthookv/");
-            
+            Log(File.Exists(gtaPath + "ScriptHookV.dll")
+                ? "Script Hook installed."
+                : "Script Hook not installed. Download at http://www.dev-c.com/gtav/scripthookv/");
         }
 
         private void modListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,43 +112,42 @@ namespace GTA5ModManager
             var modPath = "";
             try
             {
-
-                 modPath = (modListBox.SelectedItem as ModList).Path;
+                var modList = modListBox.SelectedItem as ModList;
+                if (modList != null) modPath = modList.Path;
             }
             catch (Exception)
             {
-
                 return;
             }
-            currentPath = modPath;
-        
-            if (modPath.Contains("\\mods\\disabled\\")) {
-                enableButton.Text = "Enable";
+            _currentPath = modPath;
+
+            if (modPath.Contains("\\mods\\disabled\\"))
+            {
+                enableButton.Text = Resources.ManagerForm_modListBox_SelectedIndexChanged_Enable;
             }
             else
             {
-                enableButton.Text = "Disable";
+                enableButton.Text = Resources.ManagerForm_modListBox_SelectedIndexChanged_Disable;
             }
         }
 
         private void enableButton_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(currentPath))
+            if (string.IsNullOrEmpty(_currentPath))
             {
                 return;
             }
-            if (enableButton.Text == "Enable")
+            if (enableButton.Text == Resources.ManagerForm_modListBox_SelectedIndexChanged_Enable)
             {
-                var mod = currentPath;
-                functions.EnableMod(currentPath);
+                var mod = _currentPath;
+                _functions.EnableMod(_currentPath);
                 RefreshModList();
                 Log(Path.GetFileName(mod) + " has been enabled");
-
             }
             else
             {
-                var mod = currentPath;
-                functions.DisableMod(currentPath);
+                var mod = _currentPath;
+                _functions.DisableMod(_currentPath);
                 RefreshModList();
                 Log(Path.GetFileName(mod) + " has been disabled");
             }
@@ -166,7 +155,7 @@ namespace GTA5ModManager
 
         private void Log(string message)
         {
-            functions.Log(consoleBox, message);
+            _functions.Log(consoleBox, message);
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -176,24 +165,32 @@ namespace GTA5ModManager
 
         private void uninstallButton_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(currentPath))
+            if (string.IsNullOrEmpty(_currentPath))
             {
                 return;
             }
-            DialogResult dialogResult = MessageBox.Show("This will delete the installed mod from your computer, are you sure?", "Hold on there!", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            var dialogResult =
+                MessageBox.Show(
+                    Resources
+                        .ManagerForm_uninstallButton_Click_This_will_delete_the_installed_mod_from_your_computer__are_you_sure_,
+                    Resources.ManagerForm_uninstallButton_Click_Hold_on_there_, MessageBoxButtons.YesNo);
+            switch (dialogResult)
             {
-                var mod = currentPath;
-                var modName = Path.GetFileName(currentPath);
-                functions.DeleteMod(mod);
-                RefreshModList();
-                Log(modName + " has been deleted");
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                //do something else
+                case DialogResult.Yes:
+                    var mod = _currentPath;
+                    var modName = Path.GetFileName(_currentPath);
+                    _functions.DeleteMod(mod);
+                    RefreshModList();
+                    Log(modName + " has been deleted");
+                    break;
+                case DialogResult.No:
+                    //do something else
+                    break;
             }
         }
-      
+
+        private void ManagerForm_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

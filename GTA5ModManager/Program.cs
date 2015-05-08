@@ -1,21 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
+using GTA5ModManager.Utilities;
 
 namespace GTA5ModManager
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
+            if (!Debugger.IsAttached)
+            {
+                ExceptionHandler.AddGlobalHandlers();
+
+            }
+                
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Tools.CheckForUpdates();
+
             Application.Run(new ManagerForm());
         }
     }

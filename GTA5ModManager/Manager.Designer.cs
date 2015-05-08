@@ -111,15 +111,18 @@ namespace GTA5ModManager
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(736, 368);
+            this.ClientSize = new System.Drawing.Size(746, 379);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.enableButton);
             this.Controls.Add(this.uninstallButton);
             this.Controls.Add(this.consoleBox);
             this.Controls.Add(this.modListBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(762, 418);
+            this.MinimumSize = new System.Drawing.Size(762, 418);
             this.Name = "ManagerForm";
             this.Text = "Grand Theft Manager";
+            this.Load += new System.EventHandler(this.ManagerForm_Load);
             this.ResumeLayout(false);
 
         }

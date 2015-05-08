@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GTA5ModManager.Properties
-{
-
-
+namespace GTA5ModManager.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,49 +22,123 @@ namespace GTA5ModManager.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GTA5ModManager.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string ErrorHeader {
+            get {
+                return ResourceManager.GetString("ErrorHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grand-Theft-Manager encountered an error checking for updates. Restart the program to try again..
+        /// </summary>
+        internal static string ErrorUpdates {
+            get {
+                return ResourceManager.GetString("ErrorUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new version of Grand-Theft-Manager is available. Would you like to go to the release page?.
+        /// </summary>
+        internal static string InfoUpdateAvailable {
+            get {
+                return ResourceManager.GetString("InfoUpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktualisierung verfügbar.
+        /// </summary>
+        internal static string InfoUpdatesHeader {
+            get {
+                return ResourceManager.GetString("InfoUpdatesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable.
+        /// </summary>
+        internal static string ManagerForm_modListBox_SelectedIndexChanged_Disable {
+            get {
+                return ResourceManager.GetString("ManagerForm_modListBox_SelectedIndexChanged_Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable.
+        /// </summary>
+        internal static string ManagerForm_modListBox_SelectedIndexChanged_Enable {
+            get {
+                return ResourceManager.GetString("ManagerForm_modListBox_SelectedIndexChanged_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hold on there!.
+        /// </summary>
+        internal static string ManagerForm_uninstallButton_Click_Hold_on_there_ {
+            get {
+                return ResourceManager.GetString("ManagerForm_uninstallButton_Click_Hold_on_there_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will delete the installed mod from your computer, are you sure?.
+        /// </summary>
+        internal static string ManagerForm_uninstallButton_Click_This_will_delete_the_installed_mod_from_your_computer__are_you_sure_ {
+            get {
+                return ResourceManager.GetString("ManagerForm_uninstallButton_Click_This_will_delete_the_installed_mod_from_your_co" +
+                        "mputer__are_you_sure_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update available.
+        /// </summary>
+        internal static string Tools_CheckForUpdates_Update_available {
+            get {
+                return ResourceManager.GetString("Tools_CheckForUpdates_Update_available", resourceCulture);
             }
         }
     }
