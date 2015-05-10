@@ -41,7 +41,7 @@ namespace GTA5ModManager
             // 
             // modListBox
             // 
-            this.modListBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.modListBox.BackColor = System.Drawing.Color.Black;
             this.modListBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.modListBox.Font = new System.Drawing.Font("Open Sans", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.modListBox.ForeColor = System.Drawing.Color.DimGray;
@@ -55,7 +55,7 @@ namespace GTA5ModManager
             // 
             // consoleBox
             // 
-            this.consoleBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.consoleBox.BackColor = System.Drawing.Color.Black;
             this.consoleBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.consoleBox.Font = new System.Drawing.Font("Open Sans", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consoleBox.ForeColor = System.Drawing.Color.DimGray;
@@ -68,7 +68,7 @@ namespace GTA5ModManager
             // 
             // uninstallButton
             // 
-            this.uninstallButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.uninstallButton.BackColor = System.Drawing.Color.Black;
             this.uninstallButton.FlatAppearance.BorderSize = 0;
             this.uninstallButton.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uninstallButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -82,7 +82,7 @@ namespace GTA5ModManager
             // 
             // enableButton
             // 
-            this.enableButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.enableButton.BackColor = System.Drawing.Color.Black;
             this.enableButton.FlatAppearance.BorderSize = 0;
             this.enableButton.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.enableButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -96,7 +96,7 @@ namespace GTA5ModManager
             // 
             // refreshButton
             // 
-            this.refreshButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.refreshButton.BackColor = System.Drawing.Color.Black;
             this.refreshButton.Font = new System.Drawing.Font("Open Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshButton.ForeColor = System.Drawing.SystemColors.Control;
             this.refreshButton.Location = new System.Drawing.Point(393, 208);
@@ -109,7 +109,7 @@ namespace GTA5ModManager
             // 
             // installButton
             // 
-            this.installButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.installButton.BackColor = System.Drawing.Color.Black;
             this.installButton.Font = new System.Drawing.Font("Open Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.installButton.ForeColor = System.Drawing.SystemColors.Control;
             this.installButton.Location = new System.Drawing.Point(276, 208);
