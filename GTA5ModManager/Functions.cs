@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Core;
@@ -38,7 +38,7 @@ namespace GTA5ModManager
             var path = GetGtaPath();
             if (!Directory.Exists(path + "mods/"))
             {
-                Log(consoleBox, "[MM] Mod folder does not exist; creating. \n");
+                Log(consoleBox, "[MM] Mod folder does not exist; creating. \n"); //" [MM] Mod Ordner existiert nicht. Wird erstellt... \n"
                 Directory.CreateDirectory(path + "mods/");
                 Directory.CreateDirectory(path + "mods/disabled");
             }
@@ -57,7 +57,7 @@ namespace GTA5ModManager
                 catch (Exception)
                 {
 
-                    Log(console, "Only ZIP archives are supported for automatic install");
+                    Log(console, "Only ZIP archives are supported for automatic install"); //"Nur ZIP - Archive können automatisch installiert werden"
                     return false;
                 }
 
