@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 namespace GTA5ModManager
 {
     partial class ManagerForm
@@ -76,7 +76,7 @@ namespace GTA5ModManager
             this.uninstallButton.Name = "uninstallButton";
             this.uninstallButton.Size = new System.Drawing.Size(108, 51);
             this.uninstallButton.TabIndex = 2;
-            this.uninstallButton.Text = "Uninstall";
+            this.uninstallButton.Text = "Uninstall"; //"Entfernen"
             this.uninstallButton.UseVisualStyleBackColor = false;
             this.uninstallButton.Click += new System.EventHandler(this.uninstallButton_Click);
             // 
@@ -90,7 +90,7 @@ namespace GTA5ModManager
             this.enableButton.Name = "enableButton";
             this.enableButton.Size = new System.Drawing.Size(108, 51);
             this.enableButton.TabIndex = 3;
-            this.enableButton.Text = "Enable";
+            this.enableButton.Text = "Enable"; //"Aktivieren"
             this.enableButton.UseVisualStyleBackColor = false;
             this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
             // 
@@ -103,7 +103,7 @@ namespace GTA5ModManager
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(111, 23);
             this.refreshButton.TabIndex = 4;
-            this.refreshButton.Text = "Refresh Mods";
+            this.refreshButton.Text = "Refresh Mods"; //"Liste aktualisieren"
             this.refreshButton.UseVisualStyleBackColor = false;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
@@ -116,7 +116,7 @@ namespace GTA5ModManager
             this.installButton.Name = "installButton";
             this.installButton.Size = new System.Drawing.Size(111, 23);
             this.installButton.TabIndex = 5;
-            this.installButton.Text = "Install Mod";
+            this.installButton.Text = "Install Mod"; //"Mod installieren"
             this.installButton.UseVisualStyleBackColor = false;
             this.installButton.Click += new System.EventHandler(this.installButton_Click);
             // 
@@ -141,7 +141,7 @@ namespace GTA5ModManager
             this.MaximumSize = new System.Drawing.Size(762, 418);
             this.MinimumSize = new System.Drawing.Size(762, 418);
             this.Name = "ManagerForm";
-            this.Text = "Grand Theft Manager";
+            this.Text = "Grand Theft Manager"; //"Grand Theft Manager"
             this.Load += new System.EventHandler(this.ManagerForm_Load);
             this.ResumeLayout(false);
 
@@ -159,4 +159,3 @@ namespace GTA5ModManager
 
     }
 }
-
