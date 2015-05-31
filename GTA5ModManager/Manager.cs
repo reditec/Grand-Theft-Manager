@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -119,8 +119,14 @@ namespace GTA5ModManager
                     enabledMod =>
                         new ModList {Path = gtaPath + enabledMod.Name, Name = enabledMod.Name.Replace(".asi", "")})
                     .ToList();
-
+            if(!(Directory.Exists(disabledModsPath))) //fixes a bug which causes the program to crash
+             {
+                 Directory.CreateDirectory(disabledModsPath);
+             }
             var disabledModsInfo = new DirectoryInfo(disabledModsPath);
+             
+             
+                               
 
             var disabledMods = disabledModsInfo.GetFiles("*.asi");
             mods.AddRange(disabledMods.Select(disabledMod => new ModList
