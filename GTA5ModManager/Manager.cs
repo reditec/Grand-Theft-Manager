@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -47,14 +47,14 @@ namespace GTA5ModManager
         private void Console_DragDrop(object sender, DragEventArgs e)
         {
             var files = (string[]) e.Data.GetData(DataFormats.FileDrop);
-            if (files == null) throw new ArgumentNullException("files");
+            if (files == null) throw new ArgumentNullException("files"); //"Dateien"
             foreach (var file in files)
             {
                 var status = _functions.ExtractZipFile(consoleBox, file, _functions.GetGtaPath());
                 if (status == true)
                 {
                     RefreshModList();
-                    Log(Path.GetFileName(file) + " has been installed");
+                    Log(Path.GetFileName(file) + " has been installed"); //" wurde installiert"
                 }
                
             }
@@ -69,7 +69,7 @@ namespace GTA5ModManager
 
             var enabledModsInfo = new DirectoryInfo(gtaPath);
 
-            var enabledMods = enabledModsInfo.GetFiles("*.asi");
+            var enabledMods = enabledModsInfo.GetFiles("*.asi"); 
 
 
             var mods =
@@ -86,14 +86,14 @@ namespace GTA5ModManager
                 Path = disabledModsPath + disabledMod.Name,
                 Name = disabledMod.Name.Replace(".asi", "")
             }));
-            modListBox.DisplayMember = "Name";
+            modListBox.DisplayMember = "Name"; //"Name"
             modListBox.DataSource = mods;
 
             var modsLoaded = enabledMods.Length + disabledMods.Length;
             var totalDisabled = disabledMods.Length;
             var totalEnabled = enabledMods.Length;
-            Log("[MM] " + modsLoaded + " total mods loaded, " + totalEnabled + " mods are enabled and " + totalDisabled +
-                " mods are disabled \n");
+            Log("[MM] " + modsLoaded + " total mods loaded, " + totalEnabled + " mods are enabled and " + totalDisabled + //" Mods geladen," " davon sind aktiviert und "
+                " mods are disabled \n"); //" sind deaktiviert"
         }
 
         private void PopulateModList()
@@ -103,10 +103,10 @@ namespace GTA5ModManager
 
             if (string.IsNullOrEmpty(gtaPath))
             {
-                Log("[MM] GTA Path Not Found: Check if GTA5 Installed properly");
+                Log("[MM] GTA Path Not Found: Check if GTA5 Installed properly"); //"[MM] GTA Pfad nicht gefunden: Bitte überprüfe ob GTA V korrekt installiert ist."
                 return;
             }
-            Log("[MM] Scanning for mods: " + gtaPath + "\n");
+            Log("[MM] Scanning for mods: " + gtaPath + "\n"); //"Es wird nach Mods gesucht: "
 
 
             var enabledModsInfo = new DirectoryInfo(gtaPath);
@@ -119,8 +119,14 @@ namespace GTA5ModManager
                     enabledMod =>
                         new ModList {Path = gtaPath + enabledMod.Name, Name = enabledMod.Name.Replace(".asi", "")})
                     .ToList();
-
+            if(!(Directory.Exists(disabledModsPath))) //fixes a bug which causes the program to crash
+             {
+                 Directory.CreateDirectory(disabledModsPath);
+             }
             var disabledModsInfo = new DirectoryInfo(disabledModsPath);
+             
+             
+                               
 
             var disabledMods = disabledModsInfo.GetFiles("*.asi");
             mods.AddRange(disabledMods.Select(disabledMod => new ModList
@@ -132,10 +138,10 @@ namespace GTA5ModManager
             modListBox.DataSource = mods;
 
             var modsLoaded = enabledMods.Length + disabledMods.Length;
-            Log("[MM] " + modsLoaded + " mods loaded \n");
+            Log("[MM] " + modsLoaded + " mods loaded \n"); //" Mods geladen \n"
             Log(File.Exists(gtaPath + "ScriptHookV.dll")
-                ? "Script Hook installed."
-                : "Script Hook not installed. Download at http://www.dev-c.com/gtav/scripthookv/");
+                ? "Script Hook installed." //"Script Hook ist installiert."
+                : "Script Hook not installed. Download at http://www.dev-c.com/gtav/scripthookv/"); //"ScriptHook ist nicht installiert. Lade es unter http://www.dev-c.com/gtav/scripthookv/ herunter"
         }
 
         private void modListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -173,14 +179,14 @@ namespace GTA5ModManager
                 var mod = _currentPath;
                 _functions.EnableMod(_currentPath);
                 RefreshModList();
-                Log(Path.GetFileName(mod) + " has been enabled");
+                Log(Path.GetFileName(mod) + " has been enabled"); // " wurde aktiviert"
             }
             else
             {
                 var mod = _currentPath;
                 _functions.DisableMod(_currentPath);
                 RefreshModList();
-                Log(Path.GetFileName(mod) + " has been disabled");
+                Log(Path.GetFileName(mod) + " has been disabled"); //" wurde deaktivert"
             }
         }
 
@@ -212,7 +218,7 @@ namespace GTA5ModManager
                     var modName = Path.GetFileName(_currentPath);
                     _functions.DeleteMod(mod);
                     RefreshModList();
-                    Log(modName + " has been deleted");
+                    Log(modName + " has been deleted"); //" wurde gelöscht"
                     break;
                 case DialogResult.No:
                     //do something else
@@ -234,12 +240,12 @@ namespace GTA5ModManager
                 if (status == true)
                 {
                     RefreshModList();
-                    Log(Path.GetFileName(path) + " has been installed");
+                    Log(Path.GetFileName(path) + " has been installed"); //" wurde installiert"
                 }
             }
             else
             {
-                Log("Install cancelled by user.");
+                Log("Install cancelled by user."); //"Die Installation wurde vom Benutzer abgebrochen."
             }
         }
     }
